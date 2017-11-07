@@ -141,4 +141,25 @@ public class DynamoDbManager extends SystemComponent {
     public DynamoDbStore createDynamoDbStore() {
         return new DynamoDbStore(client, tableName, ttl);
     }
+
+    /**
+     * Create a DynamoDbStore with the name of table.
+     *
+     * @param tableName the name of DynamoDB table
+     * @return DynamoDbStore
+     */
+    public DynamoDbStore createDynamoDbStore(String tableName) {
+        return new DynamoDbStore(client, tableName, ttl);
+    }
+
+    /**
+     * Create a DynamoDbStore with the name of table and TTL.
+     *
+     * @param tableName the name of DynamoDB table
+     * @param ttl the duration of time-to-live
+     * @return DynamoDbStore
+     */
+    public DynamoDbStore createDynamoDbStore(String tableName, Duration ttl) {
+        return new DynamoDbStore(client, tableName, ttl);
+    }
 }
