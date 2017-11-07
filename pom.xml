@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>enkan-component-dynamodb</artifactId>
+    <version>0.3.1</version>
     <packaging>jar</packaging>
 
     <name>enkan-component-dynamodb</name>
