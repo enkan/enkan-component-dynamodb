@@ -1,16 +1,15 @@
 package enkan.component.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBAsyncClient;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.*;
+import enkan.exception.MisconfigurationException;
 import enkan.middleware.session.KeyValueStore;
+import enkan.util.ReflectionUtils;
 
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.HashMap;
@@ -47,9 +46,9 @@ public class DynamoDbStore implements KeyValueStore {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         } catch (ClassNotFoundException e) {
-
+            throw new MisconfigurationException("core.CLASS_NOT_FOUND", e.getMessage(),
+                    ReflectionUtils.getClasspathString(), e);
         }
-        return null;
     }
 
     @Override

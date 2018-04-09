@@ -8,18 +8,14 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.amazonaws.waiters.Waiter;
 import com.amazonaws.waiters.WaiterParameters;
-import com.amazonaws.waiters.WaiterTimedOutException;
-import com.amazonaws.waiters.WaiterUnrecoverableException;
 import enkan.component.ComponentLifecycle;
 import enkan.component.SystemComponent;
 import enkan.exception.MisconfigurationException;
-import javassist.runtime.Desc;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -29,44 +25,24 @@ import java.util.Optional;
  * @author kawasima
  */
 public class DynamoDbManager extends SystemComponent {
-    @Getter
-    @Setter
     private String regionId = "us-east-1";
 
-    @Getter
-    @Setter
     private String endpoint;
 
-    @Getter
-    @Setter
     private File credentialsFile;
 
-    @Getter
-    @Setter
     private String accessKey;
 
-    @Getter
-    @Setter
     private String secretKey;
 
-    @Getter
-    @Setter
     private String tableName = "EnkanKvs";
 
-    @Getter
-    @Setter
     private Duration ttl = Duration.ofSeconds(3600);
 
-    @Getter
-    @Setter
     private long readCapacityUnits = 10;
 
-    @Getter
-    @Setter
     private long writeCapacityUnits = 5;
 
-    @Getter
-    @Setter
     private boolean createIfNotExist = true;
 
     private AmazonDynamoDB client;
@@ -110,7 +86,7 @@ public class DynamoDbManager extends SystemComponent {
                                         new AttributeDefinition("value", ScalarAttributeType.B)
                                 ),
                                 tableName,
-                                Arrays.asList(
+                                Collections.singletonList(
                                         new KeySchemaElement("id", KeyType.HASH)
                                 ),
                                 new ProvisionedThroughput(readCapacityUnits, writeCapacityUnits));
@@ -161,5 +137,85 @@ public class DynamoDbManager extends SystemComponent {
      */
     public DynamoDbStore createDynamoDbStore(String tableName, Duration ttl) {
         return new DynamoDbStore(client, tableName, ttl);
+    }
+
+    public String getRegionId() {
+        return this.regionId;
+    }
+
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    public File getCredentialsFile() {
+        return this.credentialsFile;
+    }
+
+    public String getAccessKey() {
+        return this.accessKey;
+    }
+
+    public String getSecretKey() {
+        return this.secretKey;
+    }
+
+    public String getTableName() {
+        return this.tableName;
+    }
+
+    public Duration getTtl() {
+        return this.ttl;
+    }
+
+    public long getReadCapacityUnits() {
+        return this.readCapacityUnits;
+    }
+
+    public long getWriteCapacityUnits() {
+        return this.writeCapacityUnits;
+    }
+
+    public boolean isCreateIfNotExist() {
+        return this.createIfNotExist;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
+    public void setCredentialsFile(File credentialsFile) {
+        this.credentialsFile = credentialsFile;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public void setTtl(Duration ttl) {
+        this.ttl = ttl;
+    }
+
+    public void setReadCapacityUnits(long readCapacityUnits) {
+        this.readCapacityUnits = readCapacityUnits;
+    }
+
+    public void setWriteCapacityUnits(long writeCapacityUnits) {
+        this.writeCapacityUnits = writeCapacityUnits;
+    }
+
+    public void setCreateIfNotExist(boolean createIfNotExist) {
+        this.createIfNotExist = createIfNotExist;
     }
 }

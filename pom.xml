@@ -6,11 +6,11 @@
     <parent>
         <groupId>net.unit8.enkan</groupId>
         <artifactId>enkan-parent</artifactId>
-        <version>0.3.0</version>
+        <version>0.6.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>enkan-component-dynamodb</artifactId>
-    <version>0.3.1</version>
+    <version>0.6.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>enkan-component-dynamodb</name>
@@ -21,7 +21,7 @@
     </properties>
 
     <dependencies>
-       <dependency>
+        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-dynamodb</artifactId>
             <version>${dynamosdk.version}</version>
@@ -35,12 +35,6 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -48,7 +42,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.0.4.Final</version>
+            <version>6.0.7.Final</version>
             <scope>test</scope>
         </dependency>
         <dependency>
